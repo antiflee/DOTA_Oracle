@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Website</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  {% block styles %}
+  {% endblock %}
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<li><a href="/">HOME</a></li>
+      </ul>
+			<ul class="nav navbar-nav navbar-right">
+				{% if user.is_authenticated %}
+				<li><a href="#" onClick="document.getElementById('logoutForm').submit()">Logout</a></li>
+				<form id="logoutForm" action="{% url 'accounts:logout' %}" method="POST">
+						{% csrf_token %}
+						<input type="hidden">
+				</form>
+				{% else %}
+				<li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+				<li><a href="{% url 'accounts:login' %}">Login</a></li>
+				{% endif %}
+			</ul>
+    </div>
+  </div>
+</nav>
+
+    {% block content %}
+    {% endblock %}
+
+ <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+ <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</body>
+</html>

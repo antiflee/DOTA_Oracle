@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'winrateprediction/css/winrateHome.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous">
+	</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container main">
+  <div class="title">
+		<h1 id="title" title="Click on the images or type names in the input box to add heroes"> Pick Heroes </h1>
+		<a href="#" onClick="submitHeroesFunc()"><h1 id="askOracle">Ask the Oracle</h1></a>
+  </div>
+	<a href="/"><i class="fa fa-reply fa-lg" aria-hidden="true"></i></a>
+	<div class="row container workArea">
+		<div class="radiance col-lg-6">
+			<h3 id="radianceText">Radiance</h3>
+			<div class="progress">
+			  <div id="radianceProgBar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+			<div id="radiance">
+				<input id="radianceHeroSelect" class="text-center" type="text" placeholder="Add Radiance Heroes" list="heroList1" name="radianceHeroSelect">
+				<datalist id="heroList1">
+					{% for hero in heroes.all %}
+					<option value="{{ hero.name }}" data-heroid = "{{ hero.hero_id}}" data-imageurl = "{{ hero.imageUrl }}">
+					{% endfor %}
+				</datalist>
+				<ul>
+				</ul>
+			</div>
+		</div>
+		<div class="dire col-lg-6">
+			<h3 id="direText">Dire</h3>
+			<div class="progress">
+				<div id="direProgBar" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+			<div id="dire">
+				<input id="direHeroSelect" class="text-center" type="text" placeholder="Add Dire Heroes" list="heroList2" name="direHeroSelect">
+				<datalist id="heroList2">
+					{% for hero in heroes.all %}
+					<option value="{{ hero.name }}" data-heroid = "{{ hero.hero_id}}" data-imageurl = "{{ hero.imageUrl }}">
+					{% endfor %}
+				</datalist>
+				<ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<form id="submitHeroes" class="text-center" action="{% url 'winrateprediction:winrateResult' %}" method="POST">
+	  {% csrf_token %}
+		<input id="radianceNamesInput" type="hidden" name="radianceNames" value="">
+		<input id="direNamesInput" type="hidden" name="direNames" value="">
+		<input id="radianceImgsInput" type="hidden" name="radianceImgs" value="">
+		<input id="direImgsInput" type="hidden" name="direImgs" value="">
+		<input id="radianceIdsInput" type="hidden" name="radianceIds" value="">
+		<input id="direIdsInput" type="hidden" name="direIds" value="">
+	</form>
+</div>
+<br>
+		<div class="heroesDiv container main">
+			{% for hero in heroes.all %}
+			<div id="heroDiv{{ hero.hero_id }}" onClick="addHero('{{ hero.name }}','{{ hero.imageUrl }}','{{ hero.hero_id }}')" class="heroImgAndName">
+				<img class="heroImg" src="{{ hero.imageUrl }}" alt="HeroPicture">
+				<div class="heroName">
+					{{ hero.name }}
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+<script type="text/javascript">
+	var radianceIds = [];
+	var direIds = [];
+	var radianceImgs = [];
+	var direImgs = [];
+
+	var addHero = function(name,imageUrl,hero_id){
+		if (doesExist(hero_id)) {
+			alert("This hero has already been picked!");
+			return;
+		} else {
+			if($("#radiance").find("li").length < 5) {
+				$("#radiance ul").append("<li id='"+hero_id+"-"+imageUrl+"'>"+name+"</li>");
+				radianceIds.push(hero_id);
+				radianceImgs.push(imageUrl);
+				var newLen = $("#radiance ul").find("li").length/5*100;
+				$("#radianceProgBar").css('width',newLen+'%');
+				showHideAskOracle();
+			} else if ($("#dire").find("li").length < 5) {
+				$("#dire ul").append("<li id='"+hero_id+"-"+imageUrl+"'>"+name+"</li>");
+				direIds.push(hero_id);
+				direImgs.push(imageUrl);
+				var newLen = $("#dire ul").find("li").length/5*100;
+				$("#direProgBar").css('width',newLen+'%');
+				showHideAskOracle();
+			} else {
+				alert("You can only have five heroes on each team.")
+			};
+		};
+	};
+
+	var addHeroFromInput = function(name,imageUrl,hero_id,side) {
+		if (doesExist(hero_id)) {
+			alert("This hero has already been picked!");
+			return;
+		} else if (side === "radiance") {
+			if ($("#radiance").find("li").length < 5) {
+				$("#radiance ul").append("<li id='"+hero_id+"-"+imageUrl+"'>"+name+"</li>");
+				radianceIds.push(hero_id);
+				radianceImgs.push(imageUrl);
+				var newLen = $("#radiance ul").find("li").length/5*100;
+				$("#radianceProgBar").css('width',newLen+'%');
+				showHideAskOracle();
+			} else {
+				alert("You can only have five heroes on each team.")
+			};
+		} else if (side === "dire") {
+			if  ($("#dire").find("li").length < 5) {
+				$("#dire ul").append("<li id='"+hero_id+"-"+imageUrl+"'>"+name+"</li>");
+				direIds.push(hero_id);
+				direImgs.push(imageUrl);
+				var newLen = $("#dire ul").find("li").length/5*100;
+				$("#direProgBar").css('width',newLen+'%');
+				showHideAskOracle();
+			} else {
+				alert("You can only have five heroes on each team.")
+			};
+		} else {
+
+		};
+	};
+
+	var submitHeroesFunc = function() {
+		if (radianceIds.length < 5 || direIds.length < 5) {
+			alert("You need five heroes on each side to ask the Oracle...")
+		} else {
+		  var radianceNames = $(".radiance li").toArray()
+		  var direNames = $(".dire li").toArray()
+
+		  radianceNames = radianceNames.map(function(h) {
+		    return h.textContent;
+		  }).join();
+		  direNames = direNames.map(function(h) {
+		    return h.textContent;
+		  }).join();
+
+			$("#radianceNamesInput").val(radianceNames);
+			$("#direNamesInput").val(direNames);
+			$("#radianceImgsInput").val(radianceImgs.join());
+			$("#direImgsInput").val(direImgs.join());
+			$("#radianceIdsInput").val(radianceIds.join());
+			$("#direIdsInput").val(direIds.join());
+
+		  $("#submitHeroes").submit();
+		};
+	};
+
+	var doesExist = function(hero_id){
+		return (jQuery.inArray(hero_id,radianceIds) >= 0) || (jQuery.inArray(hero_id,direIds) >= 0);
+	};
+
+	var showHideAskOracle = function() {
+		if (radianceIds.length == 5 && direIds.length == 5) {
+			$("#askOracle").show().addClass('animated pulse');
+			$("#title").hide();
+		} else {
+			$("#askOracle").hide();
+			$("#title").show().addClass('animated pulse');
+		}
+	}
+	showHideAskOracle();
+	// var updateArrays = function() {
+	//
+	// };
+
+	// $("#submitButton").on("click", function(event){
+	//   submitHeroesFunc();
+	// });
+
+</script>
+<script type="text/javascript" src="{% static 'winrateprediction/js/winrateHome.js' %}"></script>
+{% endblock %}

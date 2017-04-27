@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block styles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'winrateprediction/css/winrateResult.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container main">
+  <div class="row">
+		<div class="col-lg-12">
+			<h1> The Oracle Says: </h1>
+			<div class="col-lg-3" id="radianceBox">
+				<h2 id="radianceText">Radiance</h2>
+				<br>
+				{% for heroName,imageUrl in radianceInfo %}
+					<p>
+						<div class="radianceHeroes">
+							<span>{{ heroName }}</span>
+							<img class="heroImg" src="{{ imageUrl }}" alt="HeroPicture">
+						</div>
+					</p>
+					<br>
+					<br>
+				{% endfor %}
+			</div>
+			<div class="col-lg-6" id="winningRateBox">
+				<div id="rateBar">
+					<img id="oracleIcon" src="{% static 'winrateprediction/images/oracle_icon.png' %}" alt="Oracle Icon">
+					<div class="progress" id="winningRate">
+					  <div class="progress-bar progress-bar-success" id="radiance" style="width: 0%">
+							<h3>{{ winRate }}%</h3>
+					  </div>
+					  <div class="progress-bar progress-bar-success" id="dire" style="width: 0%">
+							<h3>{{ direRate }}%</h3>
+					  </div>
+					</div>
+				</div>
+				<div id="oraclesWords">
+					<h3>the radiance will <span id="winOrLose"></span>. . . <span id="winChance"></span>.</h3>
+				</div>
+			</div>
+			<div class="col-lg-3" id="direBox">
+				<h2 id="direText">Dire</h2>
+				<br>
+				{% for heroName,imageUrl in direInfo %}
+					<p>
+						<div class="direHeroes">
+							<img class="heroImg" src="{{ imageUrl }}" alt="HeroPicture">
+							<span>{{ heroName }}</span>
+						</div>
+					</p>
+					<br>
+					<br>
+				{% endfor %}
+			</div>
+      <!-- <div id="winningRate">
+        <div id="radiance"></div>
+      </div> -->
+      <div id="goBack" class="text-center">
+        <hr>
+				<a class="btn btn-default btn-lg btn-block" href="{% url 'winrateprediction:winrateHome' %}">Hmmm...Okay...</a>
+      </div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+// $('#radiance').animate({width: Math.min(100,{{ winRate }}+5)+"%"}, 1000, "linear");
+// $('#radiance').animate({width: Math.max(0,{{ winRate }}-2)+"%"}, 500, "linear");
+$('#radiance').animate({width: {{ winRate }}+"%"}, 250, "linear");
+$('#dire').animate({width: {{ direRate }}+"%"}, 250, "linear");
+$('#oracleIcon').animate({marginLeft: Math.max(0,({{ winRate }}-3))+"%"}, 700, "linear");
+</script>
+<script type="text/javascript">
+	if ({{ winRate }} > 55) {
+		$("#winOrLose").text("win");
+		$("#winOrLose").addClass("radianceWinStyle");
+		if ({{ winRate }} > 85) {
+			$("#winChance").text("definitely");
+			$("#winChance").addClass("radianceWinStyle definitely");
+		} else if ({{ winRate }} > 65) {
+			$("#winChance").text("probably");
+			$("#winChance").addClass("radianceWinStyle probably");
+		} else {
+			$("#winChance").text("possibly");
+			$("#winChance").addClass("radianceWinStyle possibly");
+		}
+	} else if ({{ winRate }} > 45) {
+		$("#winOrLose").text("... well, it's hard to say...");
+	} else {
+		$("#winOrLose").text("lose");
+		$("#winOrLose").addClass("direWinStyle");
+		if ({{ winRate }} > 35) {
+			$("#winChance").text("possibly");
+			$("#winChance").addClass("direWinStyle possibly");
+		} else if ({{ winRate }} > 15) {
+			$("#winChance").text("probably");
+			$("#winChance").addClass("direWinStyle probably");
+		} else {
+			$("#winChance").text("definitely");
+			$("#winChance").addClass("direWinStyle definitely");
+		}
+	}
+</script>
+<script src="{% static 'winrateprediction/js/winrateResult.js' %}"></script>
+{% endblock %}

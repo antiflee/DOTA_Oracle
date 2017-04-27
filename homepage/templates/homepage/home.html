@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dota Oracle</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"> -->
+  	<link rel="stylesheet" type="text/css" href="{% static 'dota/css/home.css' %}">
+		<link href='http://fonts.googleapis.com/css?family=Raleway:200,400,800' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="container demo">
+      <div class="content">
+        <div id="large-header" class="large-header">
+            <video id="oracleVideo" playsinline autoplay muted loop poster="http://cdn.dota2.com/apps/dota2/videos/oracle/oracle_web_loop.jpg">
+              <source src="http://cdn.dota2.com/apps/dota2/videos/oracle/oracle_web_loop.webm" type="video/webm">
+              <source src="http://cdn.dota2.com/apps/dota2/videos/oracle/oracle_web_loop.mp4" type="video/mp4">
+              <img src="http://cdn.dota2.com/apps/dota2/videos/oracle/oracle_web_loop.jpg">
+            </video>
+          <canvas id="canvas"></canvas>
+          <a href="/winrateprediction">
+            <h1 class="main-title noselect"><span class="thin">DOTA</span><span class="thick"> Oracle</span></h1>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/TweenLite.min.js"></script>
+  <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/EasePack.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script src="{% static 'dota/js/home.js' %}"></script>
+</html>
