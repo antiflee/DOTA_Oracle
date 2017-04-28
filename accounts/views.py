@@ -20,9 +20,6 @@ def signup(request):
 
 def loginview(request):
     if request.method == 'POST':
-        # username = request.POST['username']
-        # password = request.POST['password']
-        # user = authenticate(username=username, password=password)
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request, user)

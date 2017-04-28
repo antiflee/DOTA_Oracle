@@ -52,6 +52,20 @@ $("#radianceHeroSelect").on('input', function(event){
     findHeroFromInput($(this),"radiance");
   });
 
+$("#helpIcon").click(function(event){
+  $("#helpDiv").fadeToggle("slow", "linear");
+	event.stopPropagation();
+});
+
+$("#imgUploadIcon").click(function(event){
+  $("#imageUploadDiv").fadeToggle("linear");
+	event.stopPropagation();
+});
+
+$("body").click(function(){
+  $("#helpDiv").fadeOut("linear");
+})
+
 // $("input[type='text']").keypress(function(event){
 // 	if(event.which === 13){
 // 		var todoText = $(this).val();

@@ -4,8 +4,6 @@ import numpy as np
 import requests
 import os
 
-
-
 class Hero(models.Model):
     name = models.CharField(max_length=30,unique=True)
     hero_id = models.CharField(max_length=10)

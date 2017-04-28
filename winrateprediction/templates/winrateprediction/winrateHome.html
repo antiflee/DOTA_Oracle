@@ -18,10 +18,22 @@
 
 <div class="container main">
   <div class="title">
-		<h1 id="title" title="Click on the images or type names in the input box to add heroes"> Pick Heroes </h1>
+		<h1 id="title"> Pick Heroes </h1>
 		<a href="#" onClick="submitHeroesFunc()"><h1 id="askOracle">Ask the Oracle</h1></a>
   </div>
-	<a href="/"><i class="fa fa-reply fa-lg" aria-hidden="true"></i></a>
+	<a id="backIcon" href="/"><i class="fa fa-reply fa-lg" aria-hidden="true"></i></a>
+	<span id="helpIcon" href="#"><i class="fa fa-question fa-2x" aria-hidden="true"></i></span>
+	<span id="imgUploadIcon" href="#"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></span>
+	<div id="helpDiv">
+		<p>
+			<span>Three ways to add heroes:</span>
+			<br>(1) Type hero name in the input box;
+			<br>(2) Click on the hero icons;
+			<br>(3) Upload an <em>in-game</em> screenshot, with 10 hero icons on the top.
+			<br>
+			<span>Click the name tag to remove a hero.</span>
+		</p>
+	</div>
 	<div class="row container workArea">
 		<div class="radiance col-lg-6">
 			<h3 id="radianceText">Radiance</h3>
@@ -56,6 +68,29 @@
 			</div>
 		</div>
 	</div>
+	<div id="imageUploadDiv">
+		<!-- <form id="uploadForm" class="form-contact" action="{% url 'winrateprediction:winrateHome' %}" method="POST" enctype="multipart/form-data">
+		  {% csrf_token %}
+			<span class="btn btn-default btn-file">
+				{{ form }}
+			</span>
+			<a href="#" onClick="document.getElementById('uploadForm').submit()"><button class="btn btn-primary">Submit</button></a>
+		</form> -->
+		<form id="uploadForm" class="form-contact" action="{% url 'winrateprediction:winrateHome' %}" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="fileUpload btn btn-default">
+					{% for field in form %}
+					<span>Browse</span>
+			      <input type="file" class="upload"
+			        name="{{ field.name }}"
+			        id="id_{{ field.name }}"
+			        value="{{ field.value }}" >
+			        <p class="help-text">{{ field.help_text }} </p>
+				{% endfor %}
+				</div>
+		   <input type="submit" value="Upload"  class="btn btn-default btn-block">
+		</form>
+	</div>
 	<form id="submitHeroes" class="text-center" action="{% url 'winrateprediction:winrateResult' %}" method="POST">
 	  {% csrf_token %}
 		<input id="radianceNamesInput" type="hidden" name="radianceNames" value="">
@@ -79,10 +114,23 @@
 		</div>
 
 <script type="text/javascript">
+	var radianceNames_origin = {{radianceNames|safe}};
+	var direNames_origin = {{direNames|safe}}
+	var radianceIds_origin = {{radianceIds|safe}};
+	var direIds_origin = {{direIds|safe}};
+	var radianceImgs_origin = {{radianceImgUrls|safe}};
+	var direImgs_origin = {{direImgUrls|safe}};
+
+	var radianceNames = [];
+	var direNames = [];
 	var radianceIds = [];
 	var direIds = [];
 	var radianceImgs = [];
 	var direImgs = [];
+
+	$(document).ready( function() {
+	    $('#uploadForm').toggleClass("btn-file");
+  });
 
 	var addHero = function(name,imageUrl,hero_id){
 		if (doesExist(hero_id)) {
@@ -179,6 +227,16 @@
 		}
 	}
 	showHideAskOracle();
+
+	if(radianceNames_origin.length>0){
+		for(var i=0;i<5;i++) {
+			addHero(radianceNames_origin[i],radianceImgs_origin[i],radianceIds_origin[i]);
+		}
+		for(var i=0;i<5;i++) {
+			addHero(direNames_origin[i],direImgs_origin[i],direIds_origin[i]);
+		}
+	}
+
 	// var updateArrays = function() {
 	//
 	// };
