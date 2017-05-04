@@ -12,16 +12,16 @@ class Hero(models.Model):
     def __str__(self):
         return self.name
 
-# import dota2api
-#
-# api = dota2api.Initialise('aaa')
-# heroes = api.get_heroes()
-# # heroes = requests.get('https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/?key='+API)
-# heroes = heroes['heroes']
-#
-# for hero in heroes:
-#     newHero = Hero()
-#     newHero.name=hero['localized_name']
-#     newHero.hero_id=str(hero['id'])
-#     newHero.imageUrl=hero['url_small_portrait']
-#     newHero.save()
+import dota2api
+
+api = dota2api.Initialise('aaa')
+heroes = api.get_heroes()
+# heroes = requests.get('https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/?key='+API)
+heroes = heroes['heroes']
+
+for hero in heroes:
+    newHero = Hero()
+    newHero.name=hero['localized_name']
+    newHero.hero_id=str(hero['id'])
+    newHero.imageUrl=hero['url_small_portrait']
+    newHero.save()
