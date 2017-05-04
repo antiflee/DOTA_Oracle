@@ -66,6 +66,10 @@ $("body").click(function(){
   $("#helpDiv").fadeOut("linear");
 })
 
+$("#uploadButton").click(function(){
+  $(".analyzingPicText").fadeIn("linear");
+})
+
 // $("input[type='text']").keypress(function(event){
 // 	if(event.which === 13){
 // 		var todoText = $(this).val();

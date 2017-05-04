@@ -185,6 +185,21 @@ a:hover {
 	filter: alpha(opacity=0);
 }
 
+.analyzingPicText {
+	position: absolute;
+	left: 27%;
+	bottom: 20px;
+	width: 50%;
+	color: white;
+	text-align: center;
+	display: none;
+}
+
+.analyzingPicText p {
+	font-size: 1.5em;
+	color: gray;
+}
+
 /*.btn-file {
     position: relative;
     overflow: hidden;

@@ -34,6 +34,10 @@
 			<span>Click the name tag to remove a hero.</span>
 		</p>
 	</div>
+	<div class="analyzingPicText">
+		<h2>Analyzing the picture...</h2>
+		<p>Note the obtained 10 Heroes may not be all correct.</p>
+	</div>
 	<div class="row container workArea">
 		<div class="radiance col-lg-6">
 			<h3 id="radianceText">Radiance</h3>
@@ -88,7 +92,7 @@
 			        <p class="help-text">{{ field.help_text }} </p>
 				{% endfor %}
 				</div>
-		   <input type="submit" value="Upload"  class="btn btn-default btn-block">
+		   <input id="uploadButton" type="submit" value="Upload"  class="btn btn-default btn-block">
 		</form>
 	</div>
 	<form id="submitHeroes" class="text-center" action="{% url 'winrateprediction:winrateResult' %}" method="POST">
