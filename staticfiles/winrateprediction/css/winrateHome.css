@@ -1,0 +1,321 @@
+body {
+	background: url("../images/galaxy.jpg");
+	background-size: 100%;
+	padding-top: 70px;
+	font-family: "Lato", Georgia, serif;
+}
+
+hr {
+	width: 100%;
+	border-top:1px solid #f8f8f8;
+	border-bottom:1px solid rgba(0,0,0,0.2);
+}
+
+h1 {
+	color: #2980b9;
+	margin: 0;
+	padding: 10px 20px;
+	text-transform: uppercase;
+	/*font-size: 24px;
+	font-weight: normal;*/
+}
+
+/*h2 {
+	color: #faf2ff;
+	font-size: 2.5em;
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 30%;
+	margin: 0 auto;
+}*/
+
+h4 {
+	color: gray;
+	margin: 0 auto;
+}
+
+hr {
+	border-top:1px solid #f8f8f8;
+	border-bottom:1px solid rgba(0,0,0,0,2);
+}
+
+input {
+	font-size: 18px;
+	background: #f7f7f7;
+	width: 100%;
+	padding: 13px 13px 13px 20px;
+	box-sizing: border-box;
+	color: #2980b9;
+	border: 3px solid  rgba(0, 0, 0, 0);
+}
+
+input:focus {
+	background: white;
+	border: 3px solid  #2980b9;
+	outline: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.title, .radiance, .dire {
+	text-align: center;
+}
+
+.workArea {
+	height: 360px;
+}
+
+.container.main {
+	position: relative;
+	background-color: black;
+	padding: 20px 20px;
+	border-radius: 10px;
+}
+
+.heroImgAndName {
+	position: relative;
+	display: inline;
+	cursor: pointer;
+}
+
+.heroImg {
+	opacity: 1;
+	/*transition: .5s ease;
+	backface-visibility: hidden;*/
+}
+
+.heroName {
+	color: white;
+	font-size: 10px;
+	opacity: 0;
+	display: inline;
+	position: absolute;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 20%;
+  /*transition: .5s ease;*/
+}
+
+.heroImgAndName:hover .heroImg {
+	opacity: 0.3;
+}
+
+.heroImgAndName:hover .heroName {
+	opacity: 1;
+}
+
+.main ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.main li {
+	background: white;
+	height: 40px;
+	line-height: 40px;
+	color: #666;
+	font-size: 20px;
+	padding-left: 20px;
+	cursor: pointer;
+}
+
+.main li:nth-child(2n) {
+	background: #f7f7f7;
+}
+
+.container {
+	opacity: 0.9;
+}
+
+.main {
+	background: white;
+}
+
+.navbar-inverse {
+	background: #2c3e50;
+	font-size: 120%;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+	background: #242424;
+}
+
+.navbar-inverse .navbar-brand {
+	color: white;
+}
+
+.buttons {
+	width: 50%;
+	height: 150px;
+	margin: 0 auto;
+	font-weight: bold;
+}
+
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+	margin: 0;
+	width: 100px;
+	height: 34px;
+	border-radius: 2px;
+	background-color: #8f9b82;
+}
+
+.fileUpload span {
+	font-size: 15px;
+}
+
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.analyzingPicText {
+	position: absolute;
+	left: 27%;
+	bottom: 20px;
+	width: 50%;
+	color: white;
+	text-align: center;
+	display: none;
+}
+
+.analyzingPicText p {
+	font-size: 1.5em;
+	color: gray;
+}
+
+/*.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}*/
+
+#backIcon {
+	position: absolute;
+	top: 10px;
+	left: 12px;
+	color: #b8dff9;
+}
+
+#imgUploadIcon {
+	position: absolute;
+	top: 11px;
+	right: 45px;
+	color: #b8dff9;
+	cursor: pointer;
+}
+
+#helpIcon {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	color: #b8dff9;
+	cursor: pointer;
+}
+
+#helpDiv {
+	background-color: #787c82;
+	opacity: 0.95;
+	color: black;
+	font-size: 1.1em;
+	position: fixed;
+	display: none;
+	padding: 5px 10px 0px 10px;
+	border-radius: 5px;
+	top: 120px;
+	right: 20px;
+	z-index: 1;
+}
+
+#helpDiv span {
+	font-weight: bold;
+}
+
+#content {
+	text-align: center;
+}
+
+#submitButton {
+	border-radius: 2px;
+	width: 50%;
+	height: 40px;
+	line-height: 40px;
+	color: orange;
+	font-weight: bolder;
+	margin: 0 auto;
+}
+
+#submitButton:hover {
+	background-color: gray;
+}
+
+#radianceText {
+	color: #59e519;
+}
+
+#direText {
+	color: #f25d2b;
+}
+
+#askOracle {
+	display: none;
+	color: #faf2ff;
+}
+
+#imageUploadDiv {
+	background-color: #787c82;
+	opacity: 0.95;
+	color: black;
+	font-size: 1.1em;
+	display: none;
+	position: absolute;
+	padding: 2px;
+	border-radius: 2px;
+	top: 40px;
+	right: -27px;
+	z-index: 1;
+}
+
+#id_image {
+	padding: 0;
+}
+
+#uploadForm {
+	width:60%;
+}
+
+#uploadForm input[type=submit] {
+	width: 100px;
+	border-radius: 2px;
+	font-size: 15px;
+}
