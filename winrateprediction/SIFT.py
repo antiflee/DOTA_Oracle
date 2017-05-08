@@ -3,7 +3,7 @@ import cv2
 import os
 from heapq import heappush, heappop
 
-HeroImageFolder = os.path.abspath("./winrateprediction/static/winrateprediction/images/.")
+HeroImageFolder = os.path.abspath("./static/winrateprediction/images/.")
 
 def reject_outliers(data, m = 2.):
     d = np.abs(data - np.median(data))
