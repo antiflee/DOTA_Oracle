@@ -40,10 +40,6 @@ canvas {
    z-index: -3;
 }
 
-/*.demo .large-header {
-   background-image: url("/static/dota/images/galaxy.jpg");
-}*/
-
 .main-title {
    position: fixed;
    top: 60%;
