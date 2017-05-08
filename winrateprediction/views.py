@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 from .models import Hero
 from .predict_ann import predictWinRate
 from .forms import ImageUploadForm
-from .SIFT import image_process
+from .imageProcess import image_process
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.conf import settings
