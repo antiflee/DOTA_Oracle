@@ -22,5 +22,4 @@ urlpatterns = [
     url(r'^$', homepage.views.home, name='home'),
     url(r'^winrateprediction/', include('winrateprediction.urls')),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^.well-known/acme-challenge/nZcaKFYf44ATKVkr9n6-97a7hZO6Pq2QdJReCE_HZfo/', homepage.views.letsencrypt)
 ]
