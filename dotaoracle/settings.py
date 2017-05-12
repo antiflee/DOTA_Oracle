@@ -28,6 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'dotaoracle.herokuapp.com',
     '127.0.0.1',
+    'www.dotaoracle.com',
     ]
 
 ADMINS = (('YF', 'antiflee@gmail.com'),)
