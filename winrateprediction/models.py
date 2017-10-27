@@ -14,7 +14,8 @@ class Hero(models.Model):
 
 # import dota2api
 #
-# api = dota2api.Initialise('A868F8A7BDA8E1E078F87E0C9166BDF2')
+# SteamAPIKEY = os.environ['SteamAPIKEY']
+# api = dota2api.Initialise(SteamAPIKEY)
 # heroes = api.get_heroes()
 # # heroes = requests.get('https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/?key='+API)
 # heroes = heroes['heroes']
