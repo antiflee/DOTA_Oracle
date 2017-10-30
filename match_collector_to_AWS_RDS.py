@@ -1,4 +1,3 @@
-32
 # Official documentation: https://wiki.teamfortress.com/wiki/WebAPI/GetMatchDetails
 #                         http://dev.dota2.com/showthread.php?t=47115
 #                         https://developer.valvesoftware.com/wiki/Steam_Web_API
